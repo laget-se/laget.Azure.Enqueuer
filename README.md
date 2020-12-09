@@ -20,3 +20,11 @@ using(var enqueuer = new laget.Azure.Enqueuer(connectionString)) {
 using(var enqueuer = new laget.Azure.Enqueuer(connectionString, new ueueClientOptions())) {
 }
 ```
+
+### Methods
+```c#
+void Enqueue(dynamic payload);
+Task EnqueueAsync(dynamic payload);
+void Enqueue(string payload);
+Task EnqueueAsync(string payload);
+```
