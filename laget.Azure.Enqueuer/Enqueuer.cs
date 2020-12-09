@@ -1,0 +1,70 @@
+﻿using System;
+using System.Threading.Tasks;
+using Azure.Storage.Queues;
+using laget.azure_enqueueuer.Extensions;
+using Newtonsoft.Json;
+
+namespace laget.Azure
+{
+    public interface IEnqueueuer
+    {
+        void Enqueue(dynamic payload);
+        Task EnqueueAsync(dynamic payload);
+        void Enqueue(string payload);
+        Task EnqueueAsync(string payload);
+    }
+
+    public class Enqueuer : IEnqueueuer, IDisposable
+    {
+        readonly QueueClient _client;
+
+        public Enqueuer(string connectionString, QueueClientOptions options)
+        {
+            _client = new QueueClient(new Uri(connectionString), options);
+        }
+
+        public Enqueuer(string connectionString)
+            : this(connectionString, new QueueClientOptions { MessageEncoding = QueueMessageEncoding.Base64 })
+        {
+        }
+
+
+        public void Enqueue(dynamic payload)
+        {
+            Send(new { payload });
+        }
+
+        public async Task EnqueueAsync(dynamic payload)
+        {
+            await SendAsync(new { payload });
+        }
+
+        public void Enqueue(string payload)
+        {
+            Send(payload);
+        }
+
+        public async Task EnqueueAsync(string payload)
+        {
+            await SendAsync(payload);
+        }
+
+
+        void Send(string payload) =>
+            _client.SendMessage(payload.ToBase64());
+
+        void Send(object payload) =>
+            _client.SendMessage(JsonConvert.SerializeObject(payload).ToBase64());
+
+        async Task SendAsync(string payload) => await
+            _client.SendMessageAsync(payload.ToBase64());
+
+        async Task SendAsync(object payload) => await
+            _client.SendMessageAsync(JsonConvert.SerializeObject(payload).ToBase64());
+
+        public void Dispose()
+        {
+            _ = _client == null;
+        }
+    }
+}
