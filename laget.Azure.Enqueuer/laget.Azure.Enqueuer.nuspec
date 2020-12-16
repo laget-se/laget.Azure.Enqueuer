@@ -15,24 +15,24 @@
     <repository type="git" url="https://github.com/laget-se/laget.Azure.Enqueuer" branch="master" />
     <dependencies>
       <group targetFramework="netstandard2.1">
-        <dependency id="Azure.Storage.Queues" version="[12.0.0, )" />
-        <dependency id="Newtonsoft.Json" version="[12.0.1, )" />
+        <dependency id="Azure.Storage.Queues" version="12.0.0" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" />
       </group>
       <group targetFramework="netstandard2.0">
-        <dependency id="Azure.Storage.Queues" version="[12.0.0, )" />
-        <dependency id="Newtonsoft.Json" version="[12.0.1, )" />
+        <dependency id="Azure.Storage.Queues" version="12.0.0" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" />
       </group>
       <group targetFramework="netcoreapp3.1">
-        <dependency id="Azure.Storage.Queues" version="[12.0.0, )" />
-        <dependency id="Newtonsoft.Json" version="[12.0.1, )" />
+        <dependency id="Azure.Storage.Queues" version="12.0.0" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" />
       </group>
       <group targetFramework="netcoreapp2.1">
-        <dependency id="Azure.Storage.Queues" version="[12.0.0, )" />
-        <dependency id="Newtonsoft.Json" version="[12.0.1, )" />
+        <dependency id="Azure.Storage.Queues" version="12.0.0" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" />
       </group>
       <group targetFramework="net48">
-        <dependency id="Azure.Storage.Queues" version="[12.0.0, )" />
-        <dependency id="Newtonsoft.Json" version="[12.0.1, )" />
+        <dependency id="Azure.Storage.Queues" version="12.0.0" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" />
       </group>
     </dependencies>
   </metadata>
