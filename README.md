@@ -1,8 +1,11 @@
-﻿# laget.Azure.Enqueuer
+# laget.Azure.Enqueuer
 Takes the hassle out of enqueueing simple string messages on a Azure queue.
 
 Great when you only need to push a simle string, or a dynamic object on a queue, and then forget about it.
 
+![Nuget](https://img.shields.io/nuget/v/laget.Azure.Enqueuer)
+
+## Usage
 ```c#
 var enqueuer = new laget.Azure.Enqueuer(connectionString);
 ```
