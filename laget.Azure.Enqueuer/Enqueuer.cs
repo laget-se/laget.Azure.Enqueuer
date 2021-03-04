@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Azure.Storage.Queues;
-using laget.azure_enqueueuer.Extensions;
+using laget.Azure.Extensions;
 using Newtonsoft.Json;
 
 namespace laget.Azure
@@ -18,6 +18,11 @@ namespace laget.Azure
     {
         private readonly QueueClient _client;
 
+        public Enqueuer(string connectionString, string queueName)
+        {
+            _client = new QueueClient(connectionString, queueName);
+        }
+
         public Enqueuer(string connectionString, QueueClientOptions options)
         {
             _client = new QueueClient(new Uri(connectionString), options);
@@ -27,7 +32,6 @@ namespace laget.Azure
             : this(connectionString, new QueueClientOptions { MessageEncoding = QueueMessageEncoding.Base64 })
         {
         }
-
 
         public void Enqueue(dynamic payload)
         {
@@ -48,7 +52,6 @@ namespace laget.Azure
         {
             await SendAsync(payload);
         }
-
 
         private void Send(string payload) =>
             _client.SendMessage(payload.ToBase64());

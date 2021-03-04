@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace laget.azure_enqueueuer.Extensions
+namespace laget.Azure.Extensions
 {
     public static class StringExtensions
     {
