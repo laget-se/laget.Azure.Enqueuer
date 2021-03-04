@@ -20,6 +20,11 @@ var enqueuer = new laget.Azure.Enqueuer(connectionString, new QueueClientOptions
 ```
 
 ```c#
+using(var enqueuer = new laget.Azure.Enqueuer(connectionString, queueName)) {
+}
+```
+
+```c#
 using(var enqueuer = new laget.Azure.Enqueuer(connectionString)) {
 }
 ```
