@@ -8,24 +8,25 @@ Great when you only need to push a simle string, or a dynamic object on a queue,
 
 ## Usage
 ```c#
-var enqueuer = new laget.Azure.Enqueuer(connectionString, queueName);
+var enqueuer = new laget.Azure.Enqueuer(connectionString);
 ```
 
 ```c#
-var enqueuer = new laget.Azure.Enqueuer(connectionString);
+var enqueuer = new laget.Azure.Enqueuer(connectionString, queueName);
 ```
 
 ```c#
 var enqueuer = new laget.Azure.Enqueuer(connectionString, new QueueClientOptions());
 ```
 
+### Using-block
 ```c#
-using(var enqueuer = new laget.Azure.Enqueuer(connectionString, queueName)) {
+using(var enqueuer = new laget.Azure.Enqueuer(connectionString)) {
 }
 ```
 
 ```c#
-using(var enqueuer = new laget.Azure.Enqueuer(connectionString)) {
+using(var enqueuer = new laget.Azure.Enqueuer(connectionString, queueName)) {
 }
 ```
 
