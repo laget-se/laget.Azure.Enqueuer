@@ -8,6 +8,10 @@ Great when you only need to push a simle string, or a dynamic object on a queue,
 
 ## Usage
 ```c#
+var enqueuer = new laget.Azure.Enqueuer(connectionString, queueName);
+```
+
+```c#
 var enqueuer = new laget.Azure.Enqueuer(connectionString);
 ```
 
