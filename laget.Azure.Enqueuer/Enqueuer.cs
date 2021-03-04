@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace laget.Azure
 {
-    public interface IEnqueueuer
+    public interface IEnqueuer
     {
         void Enqueue(dynamic payload);
         Task EnqueueAsync(dynamic payload);
@@ -14,9 +14,9 @@ namespace laget.Azure
         Task EnqueueAsync(string payload);
     }
 
-    public class Enqueuer : IEnqueueuer, IDisposable
+    public class Enqueuer : IEnqueuer, IDisposable
     {
-        readonly QueueClient _client;
+        private readonly QueueClient _client;
 
         public Enqueuer(string connectionString, QueueClientOptions options)
         {
@@ -50,16 +50,16 @@ namespace laget.Azure
         }
 
 
-        void Send(string payload) =>
+        private void Send(string payload) =>
             _client.SendMessage(payload.ToBase64());
 
-        void Send(object payload) =>
+        private void Send(object payload) =>
             _client.SendMessage(JsonConvert.SerializeObject(payload).ToBase64());
 
-        async Task SendAsync(string payload) => await
+        private async Task SendAsync(string payload) => await
             _client.SendMessageAsync(payload.ToBase64());
 
-        async Task SendAsync(object payload) => await
+        private async Task SendAsync(object payload) => await
             _client.SendMessageAsync(JsonConvert.SerializeObject(payload).ToBase64());
 
         public void Dispose()

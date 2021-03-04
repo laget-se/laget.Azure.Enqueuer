@@ -1,4 +1,4 @@
-# laget.Azure.Enqueuer
+﻿# laget.Azure.Enqueuer
 Takes the hassle out of enqueueing simple string messages on an Azure Queue.
 
 Great when you only need to push a simle string, or a dynamic object on a queue, and then forget about it.
@@ -12,7 +12,7 @@ var enqueuer = new laget.Azure.Enqueuer(connectionString);
 ```
 
 ```c#
-var enqueuer = new laget.Azure.Enqueuer(connectionString, new ueueClientOptions());
+var enqueuer = new laget.Azure.Enqueuer(connectionString, new QueueClientOptions());
 ```
 
 ```c#
@@ -21,7 +21,7 @@ using(var enqueuer = new laget.Azure.Enqueuer(connectionString)) {
 ```
 
 ```c#
-using(var enqueuer = new laget.Azure.Enqueuer(connectionString, new ueueClientOptions())) {
+using(var enqueuer = new laget.Azure.Enqueuer(connectionString, new QueueClientOptions())) {
 }
 ```
 
