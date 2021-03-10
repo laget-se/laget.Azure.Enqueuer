@@ -8,8 +8,8 @@ namespace laget.Azure
 {
     public interface IEnqueuer
     {
-        void Enqueue(dynamic payload);
-        Task EnqueueAsync(dynamic payload);
+        void Enqueue(object payload);
+        Task EnqueueAsync(object payload);
         void Enqueue(string payload);
         Task EnqueueAsync(string payload);
     }
@@ -33,14 +33,14 @@ namespace laget.Azure
         {
         }
 
-        public void Enqueue(dynamic payload)
+        public void Enqueue(object payload)
         {
-            Send(new { payload });
+            Send(payload);
         }
 
-        public async Task EnqueueAsync(dynamic payload)
+        public async Task EnqueueAsync(object payload)
         {
-            await SendAsync(new { payload });
+            await SendAsync(payload);
         }
 
         public void Enqueue(string payload)
