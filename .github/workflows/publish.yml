@@ -31,15 +31,16 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build laget.Azure.Enqueuer/laget.Azure.Enqueuer.csproj --no-restore --configuration Release
     - name: Publish
-      uses: laget-se/publish-nuget@v2.6.10
+      uses: laget-se/publish-nuget@v2.72
       with:
-        PROJECT_FILE_PATH: laget.Azure.Enqueuer/laget.Azure.Enqueuer.csproj
+        INCLUDE_SYMBOLS: true
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         NUSPEC_FILE: laget.Azure.Enqueuer.nuspec
+        PROJECT_FILE_PATH: laget.Azure.Enqueuer/laget.Azure.Enqueuer.csproj
         VERSION_STATIC: "1.1.${{github.run_number}}"
