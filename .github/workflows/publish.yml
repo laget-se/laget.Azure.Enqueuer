@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch: {}
 
 jobs:
   tests:
@@ -14,7 +15,10 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: |
+          7.0.x
+          6.0.x
+          3.1.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -37,7 +41,7 @@ jobs:
     - name: Build
       run: dotnet build laget.Azure.Enqueuer/laget.Azure.Enqueuer.csproj --no-restore --configuration Release
     - name: Publish
-      uses: laget-se/publish-nuget@v2.72
+      uses: laget-se/publish-nuget@v2.7.2
       with:
         INCLUDE_SYMBOLS: true
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
