@@ -1,17 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
-using Azure.Storage.Queues;
+﻿using Azure.Storage.Queues;
 using laget.Azure.Extensions;
 using Newtonsoft.Json;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace laget.Azure
 {
     public interface IEnqueuer
     {
-        void Enqueue(object payload);
-        Task EnqueueAsync(object payload);
-        void Enqueue(string payload);
-        Task EnqueueAsync(string payload);
+        void Enqueue(object payload, CancellationToken cancellationToken = default);
+        Task EnqueueAsync(object payload, CancellationToken cancellationToken = default);
+        void Enqueue(string payload, CancellationToken cancellationToken = default);
+        Task EnqueueAsync(string payload, CancellationToken cancellationToken = default);
     }
 
     public class Enqueuer : IEnqueuer, IDisposable
@@ -33,37 +34,37 @@ namespace laget.Azure
         {
         }
 
-        public void Enqueue(object payload)
+        public void Enqueue(object payload, CancellationToken cancellationToken = default)
         {
-            Send(payload);
+            Send(payload, cancellationToken);
         }
 
-        public async Task EnqueueAsync(object payload)
+        public async Task EnqueueAsync(object payload, CancellationToken cancellationToken = default)
         {
-            await SendAsync(payload);
+            await SendAsync(payload, cancellationToken);
         }
 
-        public void Enqueue(string payload)
+        public void Enqueue(string payload, CancellationToken cancellationToken = default)
         {
-            Send(payload);
+            Send(payload, cancellationToken);
         }
 
-        public async Task EnqueueAsync(string payload)
+        public async Task EnqueueAsync(string payload, CancellationToken cancellationToken = default)
         {
-            await SendAsync(payload);
+            await SendAsync(payload, cancellationToken);
         }
 
-        private void Send(string payload) =>
-            _client.SendMessage(payload.ToBase64());
+        private void Send(string payload, CancellationToken cancellationToken = default) =>
+            _client.SendMessage(payload.ToBase64(), cancellationToken);
 
-        private void Send(object payload) =>
-            _client.SendMessage(JsonConvert.SerializeObject(payload).ToBase64());
+        private void Send(object payload, CancellationToken cancellationToken = default) =>
+            _client.SendMessage(JsonConvert.SerializeObject(payload).ToBase64(), cancellationToken);
 
-        private async Task SendAsync(string payload) => await
-            _client.SendMessageAsync(payload.ToBase64());
+        private async Task SendAsync(string payload, CancellationToken cancellationToken = default) => await
+            _client.SendMessageAsync(payload.ToBase64(), cancellationToken);
 
-        private async Task SendAsync(object payload) => await
-            _client.SendMessageAsync(JsonConvert.SerializeObject(payload).ToBase64());
+        private async Task SendAsync(object payload, CancellationToken cancellationToken = default) => await
+            _client.SendMessageAsync(JsonConvert.SerializeObject(payload).ToBase64(), cancellationToken);
 
         public void Dispose()
         {
